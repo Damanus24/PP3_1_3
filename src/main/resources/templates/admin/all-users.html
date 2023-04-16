@@ -36,16 +36,17 @@
         </td>
 
         <td>
-            <form th:action="@{updateInfo}" method="get">
+            <div>
+            <form th:action="@{updateInfo}" method="get" style="display: inline-block;">
                 <input type="hidden" name="userId" th:value="${user.id}"/>
                 <input type="submit" value="Update"/>
             </form>
-        </td>
-        <td>
-            <form th:action="@{deleteUser}" method="post">
+
+            <form th:action="@{deleteUser}" method="post" style="display: inline-block;">
                 <input type="hidden" name="userId" th:value="${user.id}"/>
                 <input type="submit" value="Delete"/>
             </form>
+            </div>
         </td>
 
     </tr>
