@@ -49,6 +49,7 @@ public class User {
             fetch = FetchType.EAGER)
     @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
+//    @NotBlank(message = "Это поле не должно быть пустым и иметь значение \"1\", \"2\" или \"1,2\"")
     private Collection<Role> roles;
 
     public User(String name, String surname, int age, String email, String password, Collection<Role> roles) {

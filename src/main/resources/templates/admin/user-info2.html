@@ -22,7 +22,7 @@
     Age <input type="text" th:field="*{age}"/>
     <span th:if="${#fields.hasErrors('age')}" th:errors="*{age}"></span>
     <br><br>
-    Email (Нельзя редактировать!)<input type="text" th:field="*{email}"/>
+    Email <input type="text" th:field="*{email}"/>
     <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
     <br><br>
     Password <input type="text" th:field="*{password}"/>

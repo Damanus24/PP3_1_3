@@ -36,16 +36,17 @@
         </td>
 
         <td>
-            <form th:action="@{updateInfo}" method="get">
-                <input type="hidden" name="userId" th:value="${user.id}"/>
-                <input type="submit" value="Update"/>
-            </form>
-        </td>
-        <td>
-            <form th:action="@{deleteUser}" method="post">
-                <input type="hidden" name="userId" th:value="${user.id}"/>
-                <input type="submit" value="Delete"/>
-            </form>
+            <div>
+                <form th:action="@{updateInfo}" method="get" style="display: inline-block;">
+                    <input type="hidden" name="userId" th:value="${user.id}"/>
+                    <input type="submit" value="Update"/>
+                </form>
+
+                <form th:action="@{deleteUser}" method="post" style="display: inline-block;">
+                    <input type="hidden" name="userId" th:value="${user.id}"/>
+                    <input type="submit" value="Delete"/>
+                </form>
+            </div>
         </td>
 
     </tr>
@@ -58,7 +59,9 @@
 </form>
 
 <br>
-<a href="/logout">Logout</a>
+<form th:action="@{/logout}" th:method="post">
+    <input type="submit" value="Logout">
+</form>
 
 </body>
 </html>
