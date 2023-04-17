@@ -3,11 +3,11 @@ package ru.kata.spring.boot_security.demo.security;
 import org.springframework.security.core.GrantedAuthority;
 import ru.kata.spring.boot_security.demo.models.Role;
 
-public class RoleG implements GrantedAuthority {
+public class RoleGrantAuthorityImpl implements GrantedAuthority {
 
     private final Role role;
 
-    public RoleG(Role role) {
+    public RoleGrantAuthorityImpl(Role role) {
         this.role = role;
     }
 

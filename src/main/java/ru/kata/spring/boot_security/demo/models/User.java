@@ -3,14 +3,9 @@ package ru.kata.spring.boot_security.demo.models;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Objects;
 
 @Entity
@@ -28,14 +23,17 @@ public class User {
     @Size(min = 1, max = 15, message = "Имя должно содержать от 1 до 15 символов.")
     @NotBlank(message = "Это поле не должно быть пустым")
     private String name;
+
     @Column(name = "surname")
     @Size(min = 1, max = 25, message = "Фамилия должна содержать от 1 до 25 символов.")
     @NotBlank(message = "Это поле не должно быть пустым")
     private String surname;
+
     @Column(name = "age")
     @Min(value = 18, message = "Минимальный возраст 18 лет")
     @Max(value = 99, message = "Максимальный возраст 99 лет")
     private int age;
+
     @Column(name = "email")
     @Email(message = "Неверный формат для этого поля")
     @NotBlank(message = "Это поле не должно быть пустым")
@@ -45,11 +43,9 @@ public class User {
     @NotBlank(message = "Это поле не должно быть пустым")
     private String password;
 
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH},
-            fetch = FetchType.EAGER)
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})
     @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
-//    @NotBlank(message = "Это поле не должно быть пустым и иметь значение \"1\", \"2\" или \"1,2\"")
     private Collection<Role> roles;
 
     public User(String name, String surname, int age, String email, String password, Collection<Role> roles) {

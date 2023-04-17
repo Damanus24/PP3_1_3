@@ -9,17 +9,17 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import ru.kata.spring.boot_security.demo.services.UDetailsService;
+import ru.kata.spring.boot_security.demo.services.UserDetailsServiceImpl;
 
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private final UDetailsService uDetailsService;
+    private final UserDetailsServiceImpl uDetailsService;
     private final SuccessUserHandler successUserHandler;
 
     @Autowired
-    public WebSecurityConfig(UDetailsService uDetailsService, SuccessUserHandler successUserHandler) {
+    public WebSecurityConfig(UserDetailsServiceImpl uDetailsService, SuccessUserHandler successUserHandler) {
         this.uDetailsService = uDetailsService;
         this.successUserHandler = successUserHandler;
     }

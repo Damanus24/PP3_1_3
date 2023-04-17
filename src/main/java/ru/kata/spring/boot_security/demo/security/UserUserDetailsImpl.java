@@ -4,16 +4,14 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import ru.kata.spring.boot_security.demo.models.User;
-
 import java.util.Collection;
-import java.util.Collections;
 import java.util.stream.Collectors;
 
-public class UserD implements UserDetails {
+public class UserUserDetailsImpl implements UserDetails {
 
     private final User user;
 
-    public UserD(User user) {
+    public UserUserDetailsImpl(User user) {
         this.user = user;
     }
 
