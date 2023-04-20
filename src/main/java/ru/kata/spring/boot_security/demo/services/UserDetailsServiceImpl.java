@@ -5,55 +5,33 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.Transactional;
 import ru.kata.spring.boot_security.demo.models.User;
+import ru.kata.spring.boot_security.demo.models.Role;
 import ru.kata.spring.boot_security.demo.repositories.UserRepository;
 import ru.kata.spring.boot_security.demo.security.UserUserDetailsImpl;
+
+import javax.annotation.PostConstruct;
+import javax.persistence.EntityManager;
 import java.util.List;
 import java.util.Optional;
 
 @Service
-@Transactional(readOnly = true)
-public class UserDetailsServiceImpl implements UserDetailsService, MyUserDetailsService {
+//@EnableTransactionManagement
+public class UserDetailsServiceImpl implements UserDetailsService {
 
     private final UserRepository userRepository;
+//    private final EntityManager entityManager;
 
     @Autowired
-    public UserDetailsServiceImpl(UserRepository useRepository) {
+    public UserDetailsServiceImpl(UserRepository useRepository/*, EntityManager entityManager*/) {
         this.userRepository = useRepository;
+//        this.entityManager = entityManager;
     }
 
+//    @Transactional
     @Override
-    public List<User> findAll() {
-        return userRepository.findAll();
-    }
-
-    @Override
-    public User getUser(int id) {
-        Optional<User> foundUser = userRepository.findById(id);
-        return foundUser.orElse(null);
-    }
-
-    @Transactional
-    @Override
-    public void saveUser(User user) {
-        userRepository.save(user);
-    }
-
-    @Transactional
-    @Override
-    public void updateUser(User updatedUser) {
-        userRepository.save(updatedUser);
-    }
-
-    @Transactional
-    @Override
-    public void deleteUser(int id) {
-        userRepository.deleteById(id);
-    }
-
-    @Override
-    @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Optional<User> user = userRepository.findByEmail(username);
 
@@ -62,4 +40,20 @@ public class UserDetailsServiceImpl implements UserDetailsService, MyUserDetails
         }
         return new UserUserDetailsImpl(user.get());
     }
+
+//    @PostConstruct
+//    @Transactional
+//    public void postConstruct() {
+//        Role adminRole = new Role("ROLE_ADMIN");
+//        Role userRole = new Role("ROLE_USER");
+//        List<Role> adminRolesList = List.of(adminRole, userRole);
+//        List<Role> userRolesList = List.of(userRole);
+//
+//        User admin = new User("test", "test", 99, "admintest@mail.ru", "23",
+//                adminRolesList);
+//
+//        entityManager.merge(admin);
+//        userRepository.save(admin);
+//    }
+
 }

@@ -3,9 +3,7 @@ package ru.kata.spring.boot_security.demo.services;
 import ru.kata.spring.boot_security.demo.models.User;
 import java.util.List;
 
-public interface MyUserDetailsService {
-    /*Так и не понял зачем нужен этот интерфейс, если я использую в UserDetailsServiceImpl
-    методы из коробки JpaRepository, который имплементирует интерфейс UserRepository*/
+public interface UserService {
 
     public List<User> findAll();
 

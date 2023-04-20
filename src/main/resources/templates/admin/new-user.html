@@ -28,8 +28,8 @@
     Password <input type="text" th:field="*{password}"/>
     <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
     <br><br>
-    Role(s) (1 - ADMIN, 2 - USER)
-    <input type="number" th:field="*{roles}"/>
+    Role(s)
+    <input type="text" th:field="*{roles}"/>
     <span th:if="${#fields.hasErrors('roles')}" th:errors="*{roles}"></span>
     <br><br>
     <input type="submit" value="OK">

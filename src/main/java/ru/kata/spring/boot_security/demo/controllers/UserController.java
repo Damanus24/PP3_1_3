@@ -7,7 +7,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.kata.spring.boot_security.demo.models.User;
 import ru.kata.spring.boot_security.demo.security.UserUserDetailsImpl;
-import ru.kata.spring.boot_security.demo.services.UserDetailsServiceImpl;
+import ru.kata.spring.boot_security.demo.services.UserServiceImpl;
+
 import java.security.Principal;
 import java.util.Collections;
 import java.util.List;
@@ -17,10 +18,10 @@ import java.util.List;
 @RequestMapping("/user")
 public class UserController {
 
-    private final UserDetailsServiceImpl userService;
+    private final UserServiceImpl userService;
 
     @Autowired
-    public UserController(UserDetailsServiceImpl userService) {
+    public UserController(UserServiceImpl userService) {
         this.userService = userService;
     }
 
