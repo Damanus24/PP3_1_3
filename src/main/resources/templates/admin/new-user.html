@@ -14,33 +14,27 @@
     <input type="hidden" th:field="*{id}"/>
 
     Name <input type="text" th:field="*{name}"/>
-    <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+    <span style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
     <br><br>
     Surname <input type="text" th:field="*{surname}"/>
-    <span th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}"></span>
+    <span style="color: red" th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}"></span>
     <br><br>
     Age <input type="text" th:field="*{age}"/>
-    <span th:if="${#fields.hasErrors('age')}" th:errors="*{age}"></span>
+    <span style="color: red" th:if="${#fields.hasErrors('age')}" th:errors="*{age}"></span>
     <br><br>
     Email <input type="text" th:field="*{email}"/>
-    <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+    <span style="color: red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
     <br><br>
     Password <input type="text" th:field="*{password}"/>
-    <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+    <span style="color: red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
     <br><br>
     Role(s): <input type="checkbox" name="roles"
                    th:each="role : ${allRoles}"
                    th:text="${role.name}"
                    th:value="${role.id}"
                    th:field="*{roles}"/>
-    <span th:if="${#fields.hasErrors('roles')}" th:errors="*{roles}"></span>
+<!--    <span style="color: red" th:if="${#fields.hasErrors('roles')}" th:errors="*{roles}"></span>-->
 
-<!--    Role(s): <div th:each="role : ${allRoles}">-->
-<!--    <input type="checkbox" name="roles" th:value="${role.id}"-->
-<!--           th:checked="${user.roles.contains(role)}" th:field="*{roles}"/>-->
-<!--    <label th:for="${'role_' + role.id}" th:text="${role.name}"></label>-->
-<!--</div>-->
-<!--    <span th:if="${#fields.hasErrors('roles')}" th:errors="*{roles}"></span>-->
     <br><br>
     <input type="submit" value="OK">
 
