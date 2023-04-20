@@ -28,9 +28,19 @@
     Password <input type="text" th:field="*{password}"/>
     <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
     <br><br>
-    Role(s)
-    <input type="text" th:field="*{roles}"/>
+    Role(s): <input type="checkbox" name="roles"
+                   th:each="role : ${allRoles}"
+                   th:text="${role.name}"
+                   th:value="${role.id}"
+                   th:field="*{roles}"/>
     <span th:if="${#fields.hasErrors('roles')}" th:errors="*{roles}"></span>
+
+<!--    Role(s): <div th:each="role : ${allRoles}">-->
+<!--    <input type="checkbox" name="roles" th:value="${role.id}"-->
+<!--           th:checked="${user.roles.contains(role)}" th:field="*{roles}"/>-->
+<!--    <label th:for="${'role_' + role.id}" th:text="${role.name}"></label>-->
+<!--</div>-->
+<!--    <span th:if="${#fields.hasErrors('roles')}" th:errors="*{roles}"></span>-->
     <br><br>
     <input type="submit" value="OK">
 

@@ -3,13 +3,15 @@ package ru.kata.spring.boot_security.demo.models;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
 import javax.persistence.*;
 import javax.validation.constraints.*;
+
 import java.util.Collection;
 import java.util.Objects;
 
 @Entity
-@Table(name = "users", uniqueConstraints = @UniqueConstraint(columnNames = "email"))
+@Table(name = "users")
 @Setter
 @Getter
 @NoArgsConstructor
@@ -34,7 +36,7 @@ public class User {
     @Max(value = 99, message = "Максимальный возраст 99 лет")
     private int age;
 
-    @Column(name = "email")
+    @Column(name = "email", unique = true)
     @Email(message = "Неверный формат для этого поля")
     @NotBlank(message = "Это поле не должно быть пустым")
     private String email;

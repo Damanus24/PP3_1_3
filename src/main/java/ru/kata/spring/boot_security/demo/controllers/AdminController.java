@@ -5,6 +5,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
+import ru.kata.spring.boot_security.demo.models.Role;
 import ru.kata.spring.boot_security.demo.models.User;
 import ru.kata.spring.boot_security.demo.services.UserServiceImpl;
 
@@ -24,7 +26,7 @@ public class AdminController {
 
     @GetMapping("/users")
     public String showAllUsers(Model model) {
-        List<User> allUsers = userService.findAll();
+        List<User> allUsers = userService.findAllUsers();
         model.addAttribute("allUsers", allUsers);
         return "admin/all-users";
     }
@@ -35,6 +37,9 @@ public class AdminController {
         User user = new User();
         model.addAttribute("user", user);
 
+        List<Role> roles = userService.findAllRoles();
+        model.addAttribute("allRoles", roles);
+
         return "admin/new-user";
     }
 
@@ -42,10 +47,22 @@ public class AdminController {
     public String saveUser(@Valid @ModelAttribute("user") User user,
                            BindingResult bindingResult, Model model) {
 
+        List<Role> roles = userService.findAllRoles();
+        model.addAttribute("allRoles", roles);
+
         if (bindingResult.hasErrors()) {
             model.addAttribute("errors", bindingResult.getAllErrors());
+
             return "/admin/new-user";
         }
+
+        if (userService.existsUserByEmail(user.getEmail())) {
+            bindingResult.rejectValue("email", "user.email.exists",
+                    "Пользователь с таким email уже существует");
+
+            return "/admin/new-user";
+        }
+
         userService.saveUser(user);
         return "redirect:/admin/users";
     }
@@ -54,10 +71,24 @@ public class AdminController {
     public String updateUser(@Valid @ModelAttribute("user") User user,
                              BindingResult bindingResult, Model model) {
 
+        List<Role> roles = userService.findAllRoles();
+        model.addAttribute("allRoles", roles);
+
         if (bindingResult.hasErrors()) {
             model.addAttribute("errors", bindingResult.getAllErrors());
+
             return "/admin/update-user";
         }
+
+        User existingUser = userService.findUserById(user.getId());
+        if (!existingUser.getEmail().equals(user.getEmail())
+                && userService.existsUserByEmail(user.getEmail())) {
+            bindingResult.rejectValue("email", "user.email.exists",
+                    "Пользователь с таким email уже существует");
+
+            return "/admin/update-user";
+        }
+
         userService.updateUser(user);
         return "redirect:/admin/users";
     }
@@ -67,6 +98,9 @@ public class AdminController {
 
         User user = userService.getUser(id);
         model.addAttribute("user", user);
+
+        List<Role> roles = userService.findAllRoles();
+        model.addAttribute("allRoles", roles);
 
         return "/admin/update-user";
     }

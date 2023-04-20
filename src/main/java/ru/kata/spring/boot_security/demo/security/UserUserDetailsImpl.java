@@ -15,7 +15,6 @@ public class UserUserDetailsImpl implements UserDetails {
         this.user = user;
     }
 
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return user.getRoles().stream().map(role -> new SimpleGrantedAuthority(role.getName()))
@@ -59,7 +58,6 @@ public class UserUserDetailsImpl implements UserDetails {
     public int getId() {
         return this.user.getId();
     }
-
 
     @Override
     public String toString() {
